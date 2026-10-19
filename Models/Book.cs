@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Porcilescu_Ionela_Delia_Lab2.Models
@@ -8,19 +11,21 @@ namespace Porcilescu_Ionela_Delia_Lab2.Models
         public int ID { get; set; }
 
         [Display(Name = "Book Title")]
-
         public string Title { get; set; } = string.Empty;
-        public int? AuthorsID { get; set; }
-        public Authors? Authors { get; set; }
 
         [Column(TypeName = "decimal(6, 2)")]
-
         public decimal Price { get; set; }
 
-        [DataType(DataType.Date)]
         public DateTime PublishingDate { get; set; }
 
+        public int? AuthorsID { get; set; }
+
+        public Authors? Authors { get; set; }
+
         public int? PublisherID { get; set; }
+
         public Publisher? Publisher { get; set; }
+
+        public ICollection<BookCategory>? BookCategories { get; set; }
     }
 }
