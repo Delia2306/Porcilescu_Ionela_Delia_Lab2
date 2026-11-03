@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Porcilescu_Ionela_Delia_Lab2.Data;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("Porcilescu_Ionela_Delia_Lab2Context") ?? throw new InvalidOperationException("Connection string 'Porcilescu_Ionela_Delia_Lab2Context' not found.");
 
@@ -6,6 +9,11 @@ builder.Services.AddDbContext<Porcilescu_Ionela_Delia_Lab2Context>(options => op
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<LibraryIdentityContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Porcilescu_Ionela_Delia_Lab2Context")
+    ?? throw new InvalidOperationException("Connection string 'Porcilescu_Ionela_Delia_Lab2Context' not found.")));
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        .AddEntityFrameworkStores<LibraryIdentityContext>();
 
 var app = builder.Build();
 
@@ -21,6 +29,7 @@ app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

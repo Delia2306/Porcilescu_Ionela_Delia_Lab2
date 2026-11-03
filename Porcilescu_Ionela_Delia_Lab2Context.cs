@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 using Porcilescu_Ionela_Delia_Lab2;
 using Porcilescu_Ionela_Delia_Lab2.Models;
@@ -14,4 +13,7 @@ public class Porcilescu_Ionela_Delia_Lab2Context(DbContextOptions<Porcilescu_Ion
     public DbSet<Category> Category { get; set; } = default!;
 
     public DbSet<BookCategory> BookCategory { get; set; } = default!;
+
+    public DbSet<Member> Member { get; set; } = default!;
+    public DbSet<Borrowing> Borrowing { get; set; } = default!;
 }
